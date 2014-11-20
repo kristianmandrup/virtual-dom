@@ -74,3 +74,29 @@ test("indexing over thunk child", function (assert) {
     assert.equal(root.childNodes[2].childNodes[0].data, "Right")
     assert.end()
 })
+
+// Test for issue: https://github.com/Matt-Esch/virtual-dom/issues/115
+test("Select with options", function (assert) {
+    var leftNode = new VNode("select", {
+        className: "parent-node",
+        id: 'my-select'
+    }, [
+        new VNode("option"),
+        new VNode("option"),
+        new VNode("option"),
+    ])
+
+    var rightNode = new VNode("select", {
+        className: "parent-node",
+        id: 'my-new-select'
+    }, [
+        new VNode("option"),
+        new VNode("option"),
+    ])
+
+    var root = createElement(leftNode);
+    var patches = diff(leftNode, rightNode);
+    patch(root, patches);
+    // assert here!?
+    assert.end()
+})

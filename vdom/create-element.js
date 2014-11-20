@@ -30,17 +30,26 @@ function createElement(vnode, opts) {
         doc.createElement(vnode.tagName) :
         doc.createElementNS(vnode.namespace, vnode.tagName)
 
-    var props = vnode.properties
-    applyProperties(node, props)
-
-    var children = vnode.children
-
-    for (var i = 0; i < children.length; i++) {
-        var childNode = createElement(children[i], opts)
-        if (childNode) {
-            node.appendChild(childNode)
-        }
-    }
+    // try fix: https://github.com/Matt-Esch/virtual-dom/issues/115
+    addChildren(vnode, opts);
+    setProperties(vnode);
 
     return node
+
+}
+
+function setProperties(vnode) {
+  var props = vnode.properties
+  applyProperties(node, props)
+}
+
+function addChildren(vnode, opts) {
+  var children = vnode.children
+
+  for (var i = 0; i < children.length; i++) {
+      var childNode = createElement(children[i], opts)
+      if (childNode) {
+          node.appendChild(childNode)
+      }
+  }
 }
