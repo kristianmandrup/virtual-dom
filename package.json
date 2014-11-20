@@ -21,6 +21,8 @@
     "data-set": "^3.1.0",
     "error": "^4.3.0",
     "global": "^4.3.0",
+    "data-set": "^3.1.0",
+    "error": "^4.3.0",
     "is-object": "0.1.2",
     "next-tick": "^0.2.2",
     "x-is-array": "0.1.0",
